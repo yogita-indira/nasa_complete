@@ -1,0 +1,9 @@
+/server/node_modules
+/server/public
+/server/env
+
+
+/client/node_modules
+
+
+
