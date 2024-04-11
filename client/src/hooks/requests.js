@@ -1,4 +1,4 @@
-const FETCH_URL="http://localhost:8000";
+const FETCH_URL="http://192.168.46.114:8000";
 async function httpGetPlanets() {
   const response =await fetch(`${FETCH_URL}/getPlanets`)
   return await response.json();
