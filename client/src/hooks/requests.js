@@ -1,6 +1,6 @@
 const FETCH_URL="http://192.168.46.114:8000";
 async function httpGetPlanets() {
-  const response =await fetch(`${FETCH_URL}/getPlanets`)
+  const response =await fetch(`${FETCH_URL}/v1/getPlanets`)
   return await response.json();
 
   // TODO: Once API is ready.
@@ -9,7 +9,7 @@ async function httpGetPlanets() {
 
 async function httpGetLaunches() {
 
-  const response= await fetch(`${FETCH_URL}/getting`)
+  const response= await fetch(`${FETCH_URL}/v1/getting`)
   const fetchedLaunches= await response.json();
   return fetchedLaunches.sort((a,b)=>{
     return a.flightNumber-b.flightNumber;
@@ -21,7 +21,7 @@ async function httpGetLaunches() {
 
 async function httpSubmitLaunch(launch) {
   try {
- return await fetch(`${FETCH_URL}/addlaunches`, {
+ return await fetch(`${FETCH_URL}/v1/addlaunches`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +40,7 @@ async function httpSubmitLaunch(launch) {
 async function httpAbortLaunch(id) {
   // TODO: Once API is ready.
   // Delete launch with given ID.
-  return await fetch(`${FETCH_URL}/deleteLaunch/${id}`,{
+  return await fetch(`${FETCH_URL}/v1/deleteLaunch/${id}`,{
     method:"delete"
   });
 }
