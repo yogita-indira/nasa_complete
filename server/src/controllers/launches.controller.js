@@ -1,20 +1,16 @@
 import {
   launchExist,
-getAllLaunches,
-scheduleNewLaunch,
+  getAllLaunches,
+  scheduleNewLaunch,
   abortLaunch,
 } from "../models/launch.model.js";
+import Launch from "../models/launches.mongo.js";
 
 class Mylaunches {
   static async httpgetAllLaunches(req, res) {
-    try {
-      const allLaunches = Array.from(launches.values());
-      console.log(allLaunches);
-      res.status(201).json(await getAllLaunches());
-    } catch (error) {
-      console.error("Error retrieving launches:", error);
-      res.status(500).json({ error: "Internal server error" });
-    }
+
+    res.status(201).json(await getAllLaunches());
+   
   }
   static async httpAddNewLaunches(req, res) {
     try {

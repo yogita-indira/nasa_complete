@@ -60,6 +60,8 @@ import http from "http";
 import mongoose from 'mongoose';
 import app from "./app.js";
 import { loadPlanetsData } from "./models/planets.model.js";
+import {loadLaunchData} from "./models/launch.model.js";
+
 import dotenv from "dotenv";
 import { ObjectId } from 'mongodb';
 dotenv.config();
@@ -80,6 +82,7 @@ async function startServer() {
 const objectId = new ObjectId("66223cd1a9c443057ab1534b");
 console.log(`${objectId.getTimestamp()}`, "done");
   await loadPlanetsData();
+  await loadLaunchData();
   server.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
   });
