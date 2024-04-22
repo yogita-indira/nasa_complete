@@ -5,12 +5,15 @@ import {
   abortLaunch,
 } from "../models/launch.model.js";
 import Launch from "../models/launches.mongo.js";
+import getPagination from "../services/query.js";
+
 
 class Mylaunches {
   static async httpgetAllLaunches(req, res) {
+    const { skip, limit } = getPagination(req.query);
+const launches=await getAllLaunches(skip, limit);
 
-    res.status(201).json(await getAllLaunches());
-   
+    return res.status(201).json(launches);
   }
   static async httpAddNewLaunches(req, res) {
     try {

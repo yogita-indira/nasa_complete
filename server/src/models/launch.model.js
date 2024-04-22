@@ -37,28 +37,29 @@ async function populateLaunches() {
   }
 
   const launchDocs = response.data.docs;
+  // console.log(launchDocs)
   for (const launchDoc of launchDocs) {
     const payloads = launchDoc["payloads"];
     const customers = payloads.flatMap((payload) => {
       return payload["customers"];
     });
 
-    console.log(customers);
+    // console.log(customers);
     const launch = {
       flightNumber: launchDoc.flight_number,
       mission: launchDoc.name,
       rocket: launchDoc.rocket.name,
       launchDate: launchDoc.date_local,
       upcoming: launchDoc.upcoming,
-      customer:customers, // Changed from customer to customers
+      customer: customers, // Changed from customer to customers
     };
 
     await saveLaunch(launch);
+    
+console.log("launch", launch);
   }
 }
 
-
-console.log(Launch)
 
 async function loadLaunchData() {
   const firstLaunch = await findLaunch({
@@ -124,7 +125,7 @@ async function scheduleNewLaunch(launch) {
   await saveLaunch(newLaunch);
 }
 
-async function getAllLaunches() {
+async function getAllLaunches(skip, limit) {
   return await Launch.find(
     {},
     {
@@ -132,7 +133,9 @@ async function getAllLaunches() {
       _v: 0,
     }
   )
-  .skip(5).limit(50);
+   .sort({flightNumber:1})
+    .skip(skip)
+    .limit(limit);
 }
 
 async function getLatestLaunchNumber() {
